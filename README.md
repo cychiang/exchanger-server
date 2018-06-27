@@ -24,4 +24,4 @@ Install the protoc plugin for Dart
 
 Generate gRPC code
 
-    protoc --dart_out=grpc:lib/src/generated -Iprotos protos/open_changer.proto
+    protoc --dart_out=grpc:lib/src/generated -Iprotos exchanger-protos/open_changer.proto
