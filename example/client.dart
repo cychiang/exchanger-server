@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:grpc/grpc.dart';
 import '../lib/src/generated/protos/open_exchanger.pb.dart';
 import '../lib/src/generated/protos/open_exchanger.pbgrpc.dart';
+
 class Client {
   ClientChannel channel;
   OpenExchangerClient stub;
@@ -20,12 +21,11 @@ class Client {
     }
     await channel.shutdown();
   }
+
   Future<Null> runGetOxrLatest() async {
     final request = new OxrInput();
-    print('+++');
 
     await for (var rate in stub.getOxrLatest(request)) {
-      print('xxx');
       print('${rate.currency}: ${rate.ratio}');
     }
   }

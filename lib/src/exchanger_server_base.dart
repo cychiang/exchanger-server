@@ -14,17 +14,14 @@ class OpenExchanger extends OpenExchangerServiceBase {
   @override
   Stream<GrpcRate> getOxrLatest(
       grpc.ServiceCall call, OxrInput request) async* {
-    List<GrpcRate> list = [];
     latest.query.add(Params(api_key: api_key));
-    latest.results
-        .forEach((item) => item.forEach((val) => list.add(GrpcRate.create()
-          ..currency = val.currency
-          ..ratio = val.ratio.toDouble())));
-
-    print(list.length);
-    for (GrpcRate rate in list) {
-      print('${rate.currency}: ${rate.ratio}');
-      yield rate;
+    await for (List<Rate> Rates in latest.results) {
+      for (Rate rate in Rates) {
+        final _rate = GrpcRate.create()
+          ..currency = rate.currency
+          ..ratio = rate.ratio.toDouble();
+        yield _rate;
+      }
     }
   }
 
