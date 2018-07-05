@@ -24,8 +24,7 @@ class Client {
 
   Future<Null> runGetOxrLatest() async {
     final request = new OxrInput();
-
-    await for (var rate in stub.getOxrLatest(request)) {
+    await for (GrpcRate rate in stub.getOxrLatest(request)) {
       print('${rate.currency}: ${rate.ratio}');
     }
   }

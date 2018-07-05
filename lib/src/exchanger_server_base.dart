@@ -26,15 +26,15 @@ class OpenExchanger extends OpenExchangerServiceBase {
   }
 
   @override
-  Stream<GrpcCurrency> getOxrCurrencies(
-      grpc.ServiceCall call, OxrInput request) {
-    // TODO: implement getOxrCurrencies
+  Stream<GrpcRate> getOxrHistorical(grpc.ServiceCall call, OxrInput request) {
+    // TODO: implement getOxrHistorical
     return null;
   }
 
   @override
-  Stream<GrpcRate> getOxrHistorical(grpc.ServiceCall call, OxrInput request) {
-    // TODO: implement getOxrHistorical
+  Stream<GrpcCurrency> getOxrCurrencies(
+      grpc.ServiceCall call, OxrInput request) {
+    // TODO: implement getOxrCurrencies
     return null;
   }
 }
