@@ -26,16 +26,29 @@ class OpenExchanger extends OpenExchangerServiceBase {
   }
 
   @override
-  Stream<GrpcRate> getOxrHistorical(grpc.ServiceCall call, OxrInput request) {
-    // TODO: implement getOxrHistorical
-    return null;
+  Stream<GrpcRate> getOxrHistorical(grpc.ServiceCall call, OxrInput request) async* {
+    historical.query.add(Params(api_key: api_key, date: '2018-07-01'));
+    await for (List<Rate> Rates in historical.results) {
+      for (Rate rate in Rates) {
+        final _rate = GrpcRate.create()
+          ..currency = rate.currency
+          ..ratio = rate.ratio.toDouble();
+        yield _rate;
+      }
+    }
   }
 
   @override
-  Stream<GrpcCurrency> getOxrCurrencies(
-      grpc.ServiceCall call, OxrInput request) {
-    // TODO: implement getOxrCurrencies
-    return null;
+  Stream<GrpcCurrency> getOxrCurrencies (grpc.ServiceCall call, OxrInput request) async* {
+    currencies.query.add(Params(api_key: api_key));
+    await for (List<Currency> Currencies in currencies.results) {
+      for (Currency currency in Currencies) {
+        final _currency = GrpcCurrency.create()
+          ..currency = currency.currency
+          ..name = currency.name;
+        yield _currency;
+      }
+    }
   }
 }
 

@@ -15,7 +15,9 @@ class Client {
         options: new CallOptions(timeout: new Duration(seconds: 30)));
     // Run all of the demos in order.
     try {
-      await runGetOxrLatest();
+//      await runGetOxrLatest();
+      await runGetOxrHistorical();
+//      await runGetCurrencies();
     } catch (e) {
       print('Caught error: $e');
     }
@@ -26,6 +28,18 @@ class Client {
     final request = new OxrInput();
     await for (GrpcRate rate in stub.getOxrLatest(request)) {
       print('${rate.currency}: ${rate.ratio}');
+    }
+  }
+  Future<Null> runGetOxrHistorical() async {
+    final request = new OxrInput()..date='2018-07-01';
+    await for (GrpcRate rate in stub.getOxrHistorical(request)) {
+      print('${rate.currency}: ${rate.ratio}');
+    }
+  }
+  Future<Null> runGetCurrencies() async {
+    final request = new OxrInput();
+    await for (GrpcCurrency currency in stub.getOxrCurrencies(request)) {
+      print('${currency.currency}: ${currency.name}');
     }
   }
 }
