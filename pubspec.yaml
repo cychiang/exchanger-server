@@ -11,7 +11,7 @@ dependencies:
   grpc: '^0.4.1'
   protobuf: '^0.7.0'
   async: '>=1.13.3 <3.0.0'
-  open_exchange_rates: '^0.0.3'
+  open_exchange_rates: '^0.0.5'
 
 dev_dependencies:
   test: '^0.12.30'

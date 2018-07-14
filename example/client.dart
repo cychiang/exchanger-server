@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:grpc/grpc.dart';
-import '../lib/src/generated/protos/open_exchanger.pb.dart';
-import '../lib/src/generated/protos/open_exchanger.pbgrpc.dart';
+import 'package:exchanger_server/protos/open_exchanger.pb.dart';
+import 'package:exchanger_server/protos/open_exchanger.pbgrpc.dart';
 
 class Client {
   ClientChannel channel;
@@ -15,8 +15,8 @@ class Client {
         options: new CallOptions(timeout: new Duration(seconds: 30)));
     // Run all of the demos in order.
     try {
-//      await runGetOxrLatest();
-      await runGetOxrHistorical();
+      await runGetOxrLatest();
+//      await runGetOxrHistorical();
 //      await runGetCurrencies();
     } catch (e) {
       print('Caught error: $e');
@@ -25,7 +25,7 @@ class Client {
   }
 
   Future<Null> runGetOxrLatest() async {
-    final request = new OxrInput();
+    final request = new OxrInput()..symbols="JPY,TWD";
     await for (GrpcRate rate in stub.getOxrLatest(request)) {
       print('${rate.currency}: ${rate.ratio}');
     }

@@ -9,7 +9,7 @@ Created from templates made available by Stagehand under a BSD-style
 
 A simple usage example:
 
-    dart bin/server.dart
+    dart bin/server.dart ${api_key}
 
 ## Features and bugs
 
@@ -24,4 +24,4 @@ Install the protoc plugin for Dart
 
 Generate gRPC code
 
-    protoc -I exchanger-protos/ exchanger-protos/protos/open_exchanger.proto --dart_out=grpc:lib/src/generated
+    protoc -I exchanger-protos/ exchanger-protos/protos/open_exchanger.proto --dart_out=grpc:lib/protos
