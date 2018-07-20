@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:grpc/grpc.dart';
-import 'package:exchanger_server/protos/open_exchanger.pb.dart';
-import 'package:exchanger_server/protos/open_exchanger.pbgrpc.dart';
+import 'package:exchanger_server/server_export.dart';
 
 class Client {
   ClientChannel channel;

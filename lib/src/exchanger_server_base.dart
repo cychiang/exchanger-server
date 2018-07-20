@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:grpc/grpc.dart' as grpc;
 import 'package:open_exchange_rates/open_exchange_rates.dart';
-import 'package:exchanger_server/protos/open_exchanger.pbgrpc.dart';
+import 'protos/open_exchanger.pbgrpc.dart';
 
 /// Checks if you are awesome. Spoiler: you are.
 
