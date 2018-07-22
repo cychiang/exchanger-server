@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:async';
 import 'package:grpc/grpc.dart';
 import 'package:exchanger_server/server_export.dart';
@@ -14,7 +15,14 @@ class Client {
         options: new CallOptions(timeout: new Duration(seconds: 30)));
     // Run all of the demos in order.
     try {
-      print('hello');
+      OxrOutput output = await stub.get(new OxrInput()
+        ..api = 'latest'
+        ..base = 'TWD'
+        ..symbols = 'JPY,USD,SEK,GBP');
+      print(output);
+//      var message = json.decode(output.message);
+//      print(message);
+//      print('${message['Rates']}');
     } catch (e) {
       print('Caught error: $e');
     }

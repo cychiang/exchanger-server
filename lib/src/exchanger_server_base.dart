@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:grpc/grpc.dart' as grpc;
 import 'package:open_exchange_rates/open_exchange_rates.dart' as Oxr;
 import 'protos/oxr.pbgrpc.dart';
@@ -16,43 +17,40 @@ class OxrServer extends oxrServiceBase {
     int status = 200;
     switch (input.api.toString()) {
       case 'latest':
-        String jsonObj = await oxr.latest
+        String jsonObj = json.encode(await oxr.latest
             .Get(
                 base: input.base,
                 symbols: input.symbols,
                 prettyprint: input.prettyprint,
                 show_alternative: input.showAlternative)
-            .catchError(() => status = 500)
-            .toString();
+            .catchError(() => status = 500));
         return new OxrOutput()
           ..message = jsonObj
           ..status = status;
       case 'historical':
-        String jsonObj = await oxr.historical
+        String jsonObj = json.encode(await oxr.historical
             .Get(
                 date: input.date,
                 base: input.base,
                 symbols: input.symbols,
                 show_alternative: input.showAlternative,
                 prettyprint: input.prettyprint)
-            .catchError(() => status = 500)
-            .toString();
+            .catchError(() => status = 500));
         return new OxrOutput()
           ..message = jsonObj
           ..status = status;
       case 'currencies':
-        String jsonObj = await oxr.currencies
+        String jsonObj = json.encode(await oxr.currencies
             .Get(
                 prettyprint: input.prettyprint,
                 show_alternative: input.showAlternative,
                 show_inactive: input.showInactive)
-            .catchError(() => status = 500)
-            .toString();
+            .catchError(() => status = 500));
         return new OxrOutput()
           ..message = jsonObj
           ..status = status;
       case 'time-series':
-        String jsonObj = await oxr.timeseries
+        String jsonObj = json.encode(await oxr.timeseries
             .Get(
                 start: input.start,
                 end: input.end,
@@ -60,20 +58,18 @@ class OxrServer extends oxrServiceBase {
                 symbols: input.symbols,
                 show_alternative: input.showAlternative,
                 prettyprint: input.prettyprint)
-            .catchError(() => status = 500)
-            .toString();
+            .catchError(() => status = 500));
         return new OxrOutput()
           ..message = jsonObj
           ..status = status;
       case 'convert':
-        String jsonObj = await oxr.convert
+        String jsonObj = json.encode(await oxr.convert
             .Get(
                 value: input.value,
                 from: input.from,
                 to: input.to,
                 prettyprint: input.prettyprint)
-            .catchError(() => status = 500)
-            .toString();
+            .catchError(() => status = 500));
         return new OxrOutput()
           ..message = jsonObj
           ..status = status;
