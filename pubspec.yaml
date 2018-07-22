@@ -1,11 +1,11 @@
 name: exchanger_server
 description: A gRPC server for exchanger flutter app.
-# version: 1.0.0
-# homepage: https://github.com/cychiang
-# author: Casper CY Chiang <cychiang0823@gmail.com>
+version: 1.0.0
+homepage: https://github.com/cychiang/exchanger-server
+author: Casper CY Chiang <cychiang0823@gmail.com>
 
 environment:
-  sdk: '>=2.0.0-dev.55.0 <2.0.0'
+  sdk: '>=2.0.0-dev.55.0 <3.0.0'
 
 dependencies:
   grpc: '^0.4.1'
