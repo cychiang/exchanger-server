@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:grpc/grpc.dart';
-import 'package:exchanger_server/server_export.dart';
+import 'package:exchanger_server/oxr_export.dart';
 
 class Client {
   ClientChannel channel;

@@ -1,9 +1,9 @@
 /// Support for doing something awesome.
 ///
 /// More dartdocs go here.
-library exchanger_server;
+library oxr_server;
 
-export 'src/exchanger_server_base.dart';
+export 'src/oxr_server.dart';
 export 'src/protos/oxr.pb.dart';
 export 'src/protos/oxr.pbgrpc.dart';
 
