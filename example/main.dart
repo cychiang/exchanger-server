@@ -15,14 +15,13 @@ class Client {
         options: new CallOptions(timeout: new Duration(seconds: 30)));
     // Run all of the demos in order.
     try {
-      OxrOutput output = await stub.get(new OxrInput()
+      OxrOutput output;
+      output = await stub.get(new OxrInput()
         ..api = 'latest'
         ..base = 'TWD'
         ..symbols = 'JPY,USD,SEK,GBP');
-      print(output);
-//      var message = json.decode(output.message);
-//      print(message);
-//      print('${message['Rates']}');
+      var message = json.decode(output.message);
+      print('${message['rates']}');
     } catch (e) {
       print('Caught error: $e');
     }
