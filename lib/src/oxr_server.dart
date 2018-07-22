@@ -76,7 +76,7 @@ class OxrServer extends oxrServiceBase {
       default:
         return new OxrOutput()
           ..status = 500
-          ..message = "{'message':'No such method${input.api}'}";
+          ..message = "{'message':'No such method ${input.api}'}";
     }
   }
 }
