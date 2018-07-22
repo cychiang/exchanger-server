@@ -4,7 +4,7 @@
 library exchanger_server;
 
 export 'src/exchanger_server_base.dart';
-export 'src/protos/open_exchanger.pb.dart';
-export 'src/protos/open_exchanger.pbgrpc.dart';
+export 'src/protos/oxr.pb.dart';
+export 'src/protos/oxr.pbgrpc.dart';
 
 // TODO: Export any libraries intended for clients of this package.
