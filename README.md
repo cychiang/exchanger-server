@@ -18,10 +18,10 @@ Please file feature requests and bugs at the [issue tracker][tracker].
 [tracker]: http://example.com/issues/replaceme
 
 ## Use gRPC with Dart
-Install the protoc plugin for Dart 
+Install and activate protoc plugin for Dart 
 
     pub global activate protoc_plugin
 
 Generate gRPC code
 
-    protoc -I exchanger-protos/ exchanger-protos/protos/open_exchanger.proto --dart_out=grpc:lib/protos
+    protoc -I exchanger-protos/protos/v1 exchanger-protos/protos/v1/oxr.proto --dart_out=grpc:lib/src/protos
