@@ -12,10 +12,76 @@ class OxrServer extends oxrServiceBase {
   }
 
   @override
-  Future<OxrOutput> get(grpc.ServiceCall call, OxrInput request) async {
-    OxrOutput output = new OxrOutput();
-
-    return output;
+  Future<OxrOutput> get(grpc.ServiceCall call, OxrInput input) async {
+    int status = 200;
+    switch (input.api.toString()) {
+      case 'latest':
+        String jsonObj = await oxr.latest
+            .Get(
+                base: input.base,
+                symbols: input.symbols,
+                prettyprint: input.prettyprint,
+                show_alternative: input.showAlternative)
+            .catchError(() => status = 500)
+            .toString();
+        return new OxrOutput()
+          ..message = jsonObj
+          ..status = status;
+      case 'historical':
+        String jsonObj = await oxr.historical
+            .Get(
+                date: input.date,
+                base: input.base,
+                symbols: input.symbols,
+                show_alternative: input.showAlternative,
+                prettyprint: input.prettyprint)
+            .catchError(() => status = 500)
+            .toString();
+        return new OxrOutput()
+          ..message = jsonObj
+          ..status = status;
+      case 'currencies':
+        String jsonObj = await oxr.currencies
+            .Get(
+                prettyprint: input.prettyprint,
+                show_alternative: input.showAlternative,
+                show_inactive: input.showInactive)
+            .catchError(() => status = 500)
+            .toString();
+        return new OxrOutput()
+          ..message = jsonObj
+          ..status = status;
+      case 'time-series':
+        String jsonObj = await oxr.timeseries
+            .Get(
+                start: input.start,
+                end: input.end,
+                base: input.base,
+                symbols: input.symbols,
+                show_alternative: input.showAlternative,
+                prettyprint: input.prettyprint)
+            .catchError(() => status = 500)
+            .toString();
+        return new OxrOutput()
+          ..message = jsonObj
+          ..status = status;
+      case 'convert':
+        String jsonObj = await oxr.convert
+            .Get(
+                value: input.value,
+                from: input.from,
+                to: input.to,
+                prettyprint: input.prettyprint)
+            .catchError(() => status = 500)
+            .toString();
+        return new OxrOutput()
+          ..message = jsonObj
+          ..status = status;
+      default:
+        return new OxrOutput()
+          ..status = 500
+          ..message = "{'message':'No such method${input.api}'}";
+    }
   }
 }
 
